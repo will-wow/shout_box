@@ -4,12 +4,12 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
   """
   @secret Application.get_env(:shout_box, __MODULE__)[:consumer_secret]
   @key Application.get_env(:shout_box, __MODULE__)[:consumer_key]
-  @credentials "#{@key}:#{@secret}"
+  @credentials Base.encode64("#{@key}:#{@secret}")
   @base_url "https://api.twitter.com"
   @token_url "#{@base_url}/oauth2/token"
 
   def start_link do
-    Agent.start_link(fn -> %{} end, name: __MODULE__)
+    Agent.start_link(fn -> %{token: nil} end, name: __MODULE__)
   end
 
   def bearer_token do
@@ -33,9 +33,9 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
   defp fetch_bearer_token do
     result = HTTPoison.post!(
       @token_url,
-      Poison.encode!(%{body: "grant_type=client_credentials"}),
+      "grant_type=client_credentials",
       "Authorization": "Basic #{@credentials}",
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
     )
 
     body = result.body

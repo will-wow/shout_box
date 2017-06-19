@@ -3,7 +3,7 @@ defmodule ShoutBox.SocialMedia.Twitter do
   Twitter client
   """
 
-  @users_url "/users/show"
+  @users_url "/users/show.json"
   @default_image_url "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
 
   alias ShoutBox.SocialMedia.TwitterAuth
@@ -22,11 +22,15 @@ defmodule ShoutBox.SocialMedia.Twitter do
     result =
       HTTPoison.get!(
         TwitterAuth.url(@users_url),
-        ["Authorization": "Bearer #{TwitterAuth.bearer_token()}"],
+        [
+          "Authorization": "Bearer #{TwitterAuth.bearer_token()}",
+          "Content-Type": "application/json"
+        ],
         params: [ screen_name: handle ],
       )
 
     body = result.body
+    |> IO.inspect
     body = Poison.decode!(body)
   end
 
