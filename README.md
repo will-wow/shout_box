@@ -1,5 +1,7 @@
 # ShoutBox
 
+A simple, testable Phoenix app for a [Carbon Five talk night](https://www.meetup.com/Hack-Night-at-Carbon-Five-LA/events/238967639/)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
@@ -8,6 +10,10 @@ To start your Phoenix server:
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+To run the tests:
+  * Run all unit tests with `mix test`
+  * To run a single test with `mix test test/shout_box/path/to/test:15`
 
 Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
 
