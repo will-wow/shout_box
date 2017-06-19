@@ -1,6 +1,0 @@
-<h2>Edit Shout</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: shout_path(@conn, :update, @shout) %>
-
-<span><%= link "Back", to: shout_path(@conn, :index) %></span>

@@ -39,26 +39,6 @@ defmodule ShoutBox.MessagesTest do
       assert {:error, %Ecto.Changeset{}} = Messages.create_shout(@invalid_attrs)
     end
 
-    test "update_shout/2 with valid data updates the shout" do
-      shout = shout_fixture()
-      assert {:ok, shout} = Messages.update_shout(shout, @update_attrs)
-      assert %Shout{} = shout
-      assert shout.message == "some updated message"
-      assert shout.username == "some updated username"
-    end
-
-    test "update_shout/2 with invalid data returns error changeset" do
-      shout = shout_fixture()
-      assert {:error, %Ecto.Changeset{}} = Messages.update_shout(shout, @invalid_attrs)
-      assert shout == Messages.get_shout!(shout.id)
-    end
-
-    test "delete_shout/1 deletes the shout" do
-      shout = shout_fixture()
-      assert {:ok, %Shout{}} = Messages.delete_shout(shout)
-      assert_raise Ecto.NoResultsError, fn -> Messages.get_shout!(shout.id) end
-    end
-
     test "change_shout/1 returns a shout changeset" do
       shout = shout_fixture()
       assert %Ecto.Changeset{} = Messages.change_shout(shout)
