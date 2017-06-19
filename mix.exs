@@ -37,10 +37,11 @@ defmodule ShoutBox.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:httpoison, "~> 0.11.2"},
       # There's a bug in 5.0.2
-      {:idna, "5.0.2", override: true},
-      {:poison, "~> 3.1"}
+      # {:idna, "5.0.2", override: true},
+      {:hackney, "~> 1.7.0", override: true},
+      {:httpoison, "~> 0.11.1"},
+      {:poison, "~> 2.0"},
     ]
   end
 
