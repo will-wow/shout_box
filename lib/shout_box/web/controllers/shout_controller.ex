@@ -17,7 +17,8 @@ defmodule ShoutBox.Web.ShoutController do
         |> put_flash(:info, "Shout created successfully.")
         |> redirect(to: shout_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "index.html", changeset: changeset)
+        shouts = Messages.list_shouts()
+        render(conn, "index.html", shouts: shouts, changeset: changeset)
     end
   end
 end

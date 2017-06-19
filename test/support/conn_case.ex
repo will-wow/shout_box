@@ -20,6 +20,7 @@ defmodule ShoutBox.Web.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
       import ShoutBox.Web.Router.Helpers
+      import ShoutBox.Factory
 
       # The default endpoint for testing
       @endpoint ShoutBox.Web.Endpoint

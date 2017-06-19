@@ -21,6 +21,8 @@ defmodule ShoutBox.DataCase do
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
+
+      import ShoutBox.Factory
       import ShoutBox.DataCase
     end
   end
