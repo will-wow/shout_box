@@ -1,5 +1,7 @@
 <h1>Shoutbox</h1>
 
+<img src="<%= ShoutBox.SocialMedia.Twitter.fetch_image_url("WowItsWillWow") %>" />
+
 <table class="table">
   <thead>
     <tr>

@@ -17,7 +17,7 @@ defmodule ShoutBox.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {ShoutBox.Application, []},
-     extra_applications: [:logger, :runtime_tools]]
+     extra_applications: [:logger, :runtime_tools, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -28,14 +28,20 @@ defmodule ShoutBox.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.3.0-rc"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 3.2"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.6"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.11"},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 1.3.0-rc"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_ecto, "~> 3.2"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 2.6"},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:gettext, "~> 0.11"},
+      {:cowboy, "~> 1.0"},
+      {:httpoison, "~> 0.11.2"},
+      # There's a bug in 5.0.2
+      {:idna, "5.0.2", override: true},
+      {:poison, "~> 3.1"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
@@ -47,6 +53,8 @@ defmodule ShoutBox.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "db.migrate": ["ecto.migrate", "ecto.dump"],
+     "db.rollback": ["ecto.rollback", "ecto.dump"],
      "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

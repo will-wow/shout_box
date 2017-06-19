@@ -13,7 +13,7 @@ defmodule ShoutBox.Application do
       # Start the endpoint when the application starts
       supervisor(ShoutBox.Web.Endpoint, []),
       # Start your own worker by calling: ShoutBox.Worker.start_link(arg1, arg2, arg3)
-      # worker(ShoutBox.Worker, [arg1, arg2, arg3]),
+      worker(ShoutBox.SocialMedia.TwitterAuth, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
