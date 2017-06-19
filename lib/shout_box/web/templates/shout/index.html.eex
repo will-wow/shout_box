@@ -1,0 +1,28 @@
+<h2>Listing Shouts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Message</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for shout <- @shouts do %>
+    <tr>
+      <td><%= shout.username %></td>
+      <td><%= shout.message %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: shout_path(@conn, :show, shout), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: shout_path(@conn, :edit, shout), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: shout_path(@conn, :delete, shout), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Shout", to: shout_path(@conn, :new) %></span>

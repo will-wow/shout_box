@@ -1,0 +1,18 @@
+<h2>Show Shout</h2>
+
+<ul>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @shout.username %>
+  </li>
+
+  <li>
+    <strong>Message:</strong>
+    <%= @shout.message %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: shout_path(@conn, :edit, @shout) %></span>
+<span><%= link "Back", to: shout_path(@conn, :index) %></span>
