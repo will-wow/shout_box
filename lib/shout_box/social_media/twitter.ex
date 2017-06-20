@@ -2,15 +2,15 @@ defmodule ShoutBox.SocialMedia.Twitter do
   @moduledoc """
   Twitter client
   """
-  @http Application.get_env(:shout_box, :http, HTTPoison)
+  @twitter_auth Application.get_env(:shout_box, :twitter_auth, TwitterAuth)
 
   @users_url "https://api.twitter.com/1.1/users/show.json"
   @default_image_url "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
 
   alias ShoutBox.SocialMedia.TwitterAuth
 
-  def fetch_image_url(handle) do
-    user = fetch_user(handle)
+  def fetch_image_url(handle, http \\ HTTPoison) do
+    user = fetch_user(handle, http)
 
     if user do
       user["profile_image_url_https"]
@@ -19,15 +19,15 @@ defmodule ShoutBox.SocialMedia.Twitter do
     end
   end
 
-  def fetch_user(handle) do
+  def fetch_user(handle, http \\ HTTPoison) do
     result =
-      @http.get!(
+      http.get!(
         @users_url,
         [
-          "Authorization": "Bearer #{TwitterAuth.bearer_token()}",
+          "Authorization": "Bearer #{@twitter_auth.bearer_token()}",
           "Content-Type": "application/json"
         ],
-        params: [ screen_name: handle ],
+        params: [ screen_name: handle ]
       )
 
     body = result.body
