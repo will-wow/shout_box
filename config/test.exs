@@ -17,3 +17,9 @@ config :shout_box, ShoutBox.Repo,
   database: "shout_box_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+config :shout_box, ShoutBox.SocialMedia.TwitterAuth,
+  consumer_secret: "twitter_secret",
+  consumer_key: "twitter_key"
+
+import_config "test.mocks.exs"

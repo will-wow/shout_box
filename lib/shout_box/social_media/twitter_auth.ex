@@ -2,6 +2,8 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
   @moduledoc """
   Fetches bearer tokens
   """
+  @http Application.get_env(:shout_box, :http, HTTPoison)
+
   @secret Application.get_env(:shout_box, __MODULE__)[:consumer_secret]
   @key Application.get_env(:shout_box, __MODULE__)[:consumer_key]
   @credentials Base.encode64("#{@key}:#{@secret}")
@@ -22,16 +24,12 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
     end
   end
 
-  def url(path) do
-    "#{@base_url}#{path}"
-  end
-
   defp put_bearer_token(token) do
     Agent.update(__MODULE__, &(%{&1 | token: token}))
   end
 
   defp fetch_bearer_token do
-    result = HTTPoison.post!(
+    result = @http.post!(
       @token_url,
       "grant_type=client_credentials",
       "Authorization": "Basic #{@credentials}",

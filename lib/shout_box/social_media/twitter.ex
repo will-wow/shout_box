@@ -2,6 +2,7 @@ defmodule ShoutBox.SocialMedia.Twitter do
   @moduledoc """
   Twitter client
   """
+  @http Application.get_env(:shout_box, :http, HTTPoison)
 
   @users_url "https://api.twitter.com/1.1/users/show.json"
   @default_image_url "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
@@ -20,7 +21,7 @@ defmodule ShoutBox.SocialMedia.Twitter do
 
   def fetch_user(handle) do
     result =
-      HTTPoison.get!(
+      @http.get!(
         @users_url,
         [
           "Authorization": "Bearer #{TwitterAuth.bearer_token()}",

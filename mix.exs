@@ -21,7 +21,7 @@ defmodule ShoutBox.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/mocks"]
   defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
