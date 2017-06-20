@@ -5,18 +5,23 @@ defmodule ShoutBox.Factory do
   alias ShoutBox.Repo
 
   alias ShoutBox.Messages.Shout
+  alias ShoutBox.Accounts.User
 
   def build(:shout) do
     %Shout{username: "jen", message: "hello world"}
   end
 
-  # def build(:user) do
-  #   %User{username: "jen"}
-  # end
+  def with_user(%Shout{} = shout) do
+    %Shout{shout | user: build(:user)}
+  end
 
-  # def with_user(%Shout{} = shout) do
-  #   %Shout{shout | user: build(:user)}
-  # end
+  def build(:user) do
+    %User{username: "jen"}
+  end
+
+  def with_shout(%User{} = user) do
+    %User{user | shout: build(:shout)}
+  end
 
   def build(factory_name, attributes) do
     factory_name |> build() |> struct(attributes)

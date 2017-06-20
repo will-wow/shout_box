@@ -18,7 +18,7 @@ defmodule ShoutBox.Messages do
 
   """
   def list_shouts do
-    Repo.all(Shout)
+    Repo.all(from s in Shout, preload: :user)
   end
 
   @doc """
@@ -35,7 +35,11 @@ defmodule ShoutBox.Messages do
       ** (Ecto.NoResultsError)
 
   """
-  def get_shout!(id), do: Repo.get!(Shout, id)
+  def get_shout!(id) do
+    Shout
+    |> Repo.get!(id) 
+    |> Repo.preload(:user)
+  end
 
   @doc """
   Creates a shout.
@@ -49,44 +53,11 @@ defmodule ShoutBox.Messages do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_shout(attrs \\ %{}) do
-    %Shout{}
-    |> Shout.changeset(attrs)
+  def create_shout(message, user) do
+    user
+    |> Ecto.build_assoc(:shouts)
+    |> Shout.changeset(%{message: message})
     |> Repo.insert()
-  end
-
-  @doc """
-  Updates a shout.
-
-  ## Examples
-
-      iex> update_shout(shout, %{field: new_value})
-      {:ok, %Shout{}}
-
-      iex> update_shout(shout, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_shout(%Shout{} = shout, attrs) do
-    shout
-    |> Shout.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a Shout.
-
-  ## Examples
-
-      iex> delete_shout(shout)
-      {:ok, %Shout{}}
-
-      iex> delete_shout(shout)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_shout(%Shout{} = shout) do
-    Repo.delete(shout)
   end
 
   @doc """

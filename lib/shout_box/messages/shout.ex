@@ -1,12 +1,13 @@
 defmodule ShoutBox.Messages.Shout do
   use Ecto.Schema
   import Ecto.Changeset
-  alias ShoutBox.Messages.Shout
 
+  alias ShoutBox.Messages.Shout
+  alias ShoutBox.Accounts.User
 
   schema "messages_shouts" do
     field :message, :string
-    field :username, :string
+    belongs_to :user, User
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule ShoutBox.Messages.Shout do
   @doc false
   def changeset(%Shout{} = shout, attrs) do
     shout
-    |> cast(attrs, [:username, :message])
-    |> validate_required([:username, :message])
+    |> cast(attrs, [:message])
+    |> validate_required([:message])
   end
 end

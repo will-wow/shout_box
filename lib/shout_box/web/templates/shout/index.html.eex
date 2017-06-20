@@ -1,20 +1,20 @@
 <h1>Shoutbox</h1>
 
-<img src="<%= ShoutBox.SocialMedia.Twitter.fetch_image_url("WowItsWillWow") %>" />
-
 <table class="table">
   <thead>
     <tr>
+      <th></th>
       <th>Username</th>
       <th>Message</th>
-
-      <th></th>
     </tr>
   </thead>
   <tbody>
 <%= for shout <- @shouts do %>
     <tr>
-      <td><%= shout.username %></td>
+      <td>
+        <img src="<%= shout.user.profile_picture_url %>" />
+      </td>
+      <td><%= shout.user.username %></td>
       <td><%= shout.message %></td>
     </tr>
 <% end %>
