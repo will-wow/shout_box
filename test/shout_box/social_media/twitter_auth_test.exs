@@ -1,4 +1,4 @@
-defmodule ShoutBox.SocialMedia.TwitterTest do
+defmodule ShoutBox.SocialMedia.TwitterAuthTest do
   use ExUnit.Case, async: true
 
   alias ShoutBox.SocialMedia.TwitterAuth
