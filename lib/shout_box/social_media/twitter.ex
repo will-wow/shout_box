@@ -10,7 +10,7 @@ defmodule ShoutBox.SocialMedia.Twitter do
   @users_url "https://api.twitter.com/1.1/users/show.json"
   @default_image_url "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
 
-  def fetch_image_url(handle, http \\ HTTPoison) do
+  def fetch_image_url(handle, http \\ @http) do
     user = fetch_user(handle, http)
 
     if user && user["profile_image_url_https"] do

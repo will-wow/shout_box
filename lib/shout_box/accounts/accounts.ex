@@ -9,11 +9,13 @@ defmodule ShoutBox.Accounts do
   alias ShoutBox.Accounts.User
   alias ShoutBox.SocialMedia.Twitter
 
+  @twitter Application.get_env(:shout_box, :twitter, Twitter)
+
   @doc """
   Creates a user.
   """
-  def create_user(username) do
-    profile_picture_url = Twitter.fetch_image_url(username)
+  def create_user(username, twitter \\ @twitter) do
+    profile_picture_url = twitter.fetch_image_url(username)
 
     %User{}
     |> User.changeset(%{
