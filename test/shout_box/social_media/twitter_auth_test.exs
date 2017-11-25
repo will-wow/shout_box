@@ -30,7 +30,7 @@ defmodule ShoutBox.SocialMedia.TwitterAuthTest do
     |> expect(:post!, fn 
       "https://api.twitter.com/oauth2/token",
       "grant_type=client_credentials",
-      "Authorization": basic_credentials,
+      "Authorization": _basic_credentials,
       "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
     ->
       %HTTPoison.Response{

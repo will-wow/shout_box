@@ -15,8 +15,8 @@ defmodule ShoutBox.SocialMedia.Twitter do
   @users_url "https://api.twitter.com/1.1/users/show.json"
   @default_image_url "https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png"
 
-  def fetch_image_url(handle, http \\ @http) do
-    user = fetch_user(handle, http)
+  def fetch_image_url(handle) do
+    user = fetch_user(handle)
 
     if user && user["profile_image_url_https"] do
       user["profile_image_url_https"]
@@ -25,9 +25,9 @@ defmodule ShoutBox.SocialMedia.Twitter do
     end
   end
 
-  def fetch_user(handle, http \\ @http) do
+  def fetch_user(handle) do
     result =
-      http.get!(
+      @http.get!(
         @users_url,
         [
           "Authorization": "Bearer #{@twitter_auth.bearer_token()}",

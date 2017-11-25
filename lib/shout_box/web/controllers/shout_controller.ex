@@ -23,7 +23,6 @@ defmodule ShoutBox.Web.ShoutController do
       |> redirect(to: shout_path(conn, :index))
     else
       {:error, changeset} ->
-        IO.inspect changeset
         shouts = Messages.list_shouts()
         changeset = Messages.change_shout(%ShoutBox.Messages.Shout{})
 
