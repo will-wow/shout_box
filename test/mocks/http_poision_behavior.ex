@@ -8,6 +8,12 @@ defmodule ShoutBox.HTTPoisonBehavior do
   @callback post!(
     HTTPoison.binary,
     HTTPoison.body,
+    HTTPoison.headers) :: 
+      HTTPoison.Response.t | HTTPoison.AsyncResponse.t
+
+  @callback post!(
+    HTTPoison.binary,
+    HTTPoison.body,
     HTTPoison.headers,
     Keyword.t) :: 
       HTTPoison.Response.t | HTTPoison.AsyncResponse.t
