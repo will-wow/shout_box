@@ -2,6 +2,12 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
   @moduledoc """
   Fetches bearer tokens
   """
+
+  alias __MODULE__
+
+  @callback start_link() :: {:ok, Agent.on_start}
+  @callback bearer_token(HTTPoison) :: String.t
+
   @secret Application.get_env(:shout_box, __MODULE__)[:consumer_secret]
   @key Application.get_env(:shout_box, __MODULE__)[:consumer_key]
   @credentials Base.encode64("#{@key}:#{@secret}")
@@ -13,6 +19,7 @@ defmodule ShoutBox.SocialMedia.TwitterAuth do
   end
 
   def bearer_token(http \\ HTTPoison) do
+    HTTPoison.post!
     case Agent.get(__MODULE__, &(&1[:token])) do
       nil ->
         token = fetch_bearer_token(http)

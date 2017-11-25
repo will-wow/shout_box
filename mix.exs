@@ -42,6 +42,7 @@ defmodule ShoutBox.Mixfile do
       {:hackney, "~> 1.7.0", override: true},
       {:httpoison, "~> 0.11.1"},
       {:poison, "~> 2.0"},
+      {:mox, "~> 0.3", only: :test}
     ]
   end
 

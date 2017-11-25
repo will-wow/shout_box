@@ -1,4 +1,4 @@
-defmodule ShoutBox.Test.Mocks.HTTPoison do
+defmodule ShoutBox.Test.HTTPoisonMock do
   def get!(url, headers, opts \\ []) do
     send self(), {:get!, url, headers, opts}
     %HTTPoison.Response{body: "{}"}

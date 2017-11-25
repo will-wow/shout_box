@@ -24,7 +24,7 @@ defmodule ShoutBox.Web.ShoutControllerTest do
       shout_params = %{"username" => "bob", "message" => "I can build it"}
       conn = post conn, shout_path(conn, :create), shout: shout_params
 
-      expect_received {:twitter_fetch_url, "bob"}
+      assert_received {:twitter_fetch_url, "bob"}
 
       conn = get conn, shout_path(conn, :index)
       assert html_response(conn, 200) =~ "I can build it"

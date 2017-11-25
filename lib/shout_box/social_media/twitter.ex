@@ -4,6 +4,9 @@ defmodule ShoutBox.SocialMedia.Twitter do
   """
   alias ShoutBox.SocialMedia.TwitterAuth
 
+  @callback fetch_image_url(String.t, HTTPoison):: String.t
+  @callback fetch_user(String.t, HTTPoison) :: map
+
   @twitter_auth Application.get_env(:shout_box, :twitter_auth, TwitterAuth)
   @http Application.get_env(:shout_box, :http, HTTPoison)
 

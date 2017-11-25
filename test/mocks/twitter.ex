@@ -1,4 +1,4 @@
-defmodule ShoutBox.Test.Mocks.Twitter do
+defmodule ShoutBox.SocialMedia.TwitterMock do
   alias ShoutBox.SocialMedia.Twitter
   
   def fetch_image_url(handle) do

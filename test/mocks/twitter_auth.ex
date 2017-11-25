@@ -1,9 +1,9 @@
-defmodule ShoutBox.Test.Mocks.TwitterAuth do
+defmodule ShoutBox.SocialMedia.TwitterAuthMock do
   alias ShoutBox.SocialMedia.TwitterAuth
   
   def start_link do
     send self(), {:start_link}
-    {:ok, ShoutBox.SocialMedia.TwitterAuth}
+    {:ok, TwitterAuth}
   end
 
   def bearer_token do
